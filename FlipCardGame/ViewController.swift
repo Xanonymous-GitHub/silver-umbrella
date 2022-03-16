@@ -8,10 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private final let game: MatchingGame = MatchingGameImpl(openColor: #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1), closeColor: #colorLiteral(red: 0.2066814005, green: 0.7795597911, blue: 0.349144876, alpha: 1))
+    
     @IBOutlet var _cards: [UIButton]!
     @IBOutlet var flipCountLabel: UILabel!
     private var _iconList: [String] = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁"]
-    private var _cardState: [Bool] = Array(repeating: false, count: _iconList.count)
+    private var _cardState: [Bool] = Array(repeating: false, count: 12)
     
     private var _fCount:Int! = 0
     {
@@ -66,8 +68,4 @@ class ViewController: UIViewController {
         _performCardClicked(targetCardIndex: clickedCardIndex)
         _fCount += 1
     }
-}
-
-class CardViewModel {
-    final let 
 }

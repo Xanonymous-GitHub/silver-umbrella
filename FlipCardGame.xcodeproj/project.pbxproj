@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1BB570627E1AF2E007E0470 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BB570527E1AF2E007E0470 /* Card.swift */; };
+		E1BB570827E1AF54007E0470 /* MatchingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BB570727E1AF54007E0470 /* MatchingGame.swift */; };
 		E1E7ECF327D8721100B96C60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7ECF227D8721100B96C60 /* AppDelegate.swift */; };
 		E1E7ECF527D8721100B96C60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7ECF427D8721100B96C60 /* SceneDelegate.swift */; };
 		E1E7ECF727D8721100B96C60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7ECF627D8721100B96C60 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E1BB570527E1AF2E007E0470 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		E1BB570727E1AF54007E0470 /* MatchingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingGame.swift; sourceTree = "<group>"; };
 		E1E7ECEF27D8721100B96C60 /* FlipCardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipCardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E7ECF227D8721100B96C60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1E7ECF427D8721100B96C60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 				E1E7ECF227D8721100B96C60 /* AppDelegate.swift */,
 				E1E7ECF427D8721100B96C60 /* SceneDelegate.swift */,
 				E1E7ECF627D8721100B96C60 /* ViewController.swift */,
+				E1BB570527E1AF2E007E0470 /* Card.swift */,
+				E1BB570727E1AF54007E0470 /* MatchingGame.swift */,
 				E1E7ECF827D8721100B96C60 /* Main.storyboard */,
 				E1E7ECFE27D8721300B96C60 /* Assets.xcassets */,
 				E1E7ED0027D8721300B96C60 /* LaunchScreen.storyboard */,
@@ -143,7 +149,9 @@
 			files = (
 				E1E7ECFD27D8721200B96C60 /* FlipCardGame.xcdatamodeld in Sources */,
 				E1E7ECF727D8721100B96C60 /* ViewController.swift in Sources */,
+				E1BB570827E1AF54007E0470 /* MatchingGame.swift in Sources */,
 				E1E7ECF327D8721100B96C60 /* AppDelegate.swift in Sources */,
+				E1BB570627E1AF2E007E0470 /* Card.swift in Sources */,
 				E1E7ECF527D8721100B96C60 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
