@@ -9,33 +9,68 @@ import Foundation
 import UIKit
 
 protocol Card {
-    func faceUp()
-    func faceDown()
+    func flip()
+    func markAsMatched()
+    func setDebugMode(mode: Bool)
+    var id: Int { get }
+    var matchId: Int { get }
+    var color: UIColor { get }
+    var title: String { get }
+    var isOpened: Bool { get }
+    var isMatched: Bool { get }
 }
 
-class CardImpl : Card{
-    init(id: Int, title: String, openColor: UIColor!, closeColor: UIColor!) {
+class CardImpl {
+    init(id: Int, matchId: Int, title: String, openColor: UIColor!, closeColor: UIColor!, matchedColor: UIColor!) {
         self.id = id
-        self.title = title
-        self.isMatched = false
-        self.isOpened = false
-        self._openColor = openColor
-        self._closeColor = closeColor
+        self.matchId = matchId
+        _emoji = title
+        isMatched = false
+        isOpened = false
+        _openColor = openColor
+        _closeColor = closeColor
+        _matchedColor = matchedColor
     }
     
     private final let _openColor: UIColor!
     private final let _closeColor: UIColor!
-    
+    private final let _matchedColor: UIColor!
+    private final var _emoji: String
+    private final var _isDebugShowTitleEnabled = false
+
     public final let id: Int
-    public final let title: String
+    public final let matchId: Int
     public final var isOpened: Bool
     public final var isMatched: Bool
-    
-    public func faceUp() {
-        
+}
+
+extension CardImpl: Card {
+    public func setDebugMode(mode: Bool) {
+        _isDebugShowTitleEnabled = mode
     }
     
-    public func faceDown() {
-//        title = ""
+    public func flip() {
+        isOpened = !isOpened
+    }
+    
+    public func markAsMatched() {
+        isOpened = true
+        isMatched = true
+    }
+    
+    public final var color: UIColor {
+        get {
+            if (isMatched) {
+                return _matchedColor
+            }
+            
+            return isOpened ? _openColor : _closeColor
+        }
+    }
+    
+    public final var title: String {
+        get {
+            return _isDebugShowTitleEnabled || isMatched || isOpened ? _emoji : ""
+        }
     }
 }
