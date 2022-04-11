@@ -12,8 +12,18 @@ class ViewController: UIViewController {
     @IBOutlet var flipCountLabel: UILabel!
     @IBOutlet var debugModeSwitch: UISwitch!
     @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var themeNameLabel: UILabel!
     
-    private var _iconList: [String] = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐥", "🐝", "🐓", "🐲", "🍄", "⛄️"]
+    private var _themes: [[String]] = [
+        ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐥", "🐝", "🐓", "🐲", "🐠", "🐞"],
+        ["🍎", "🍌", "🥝", "🌽", "🥯", "🍒", "🍇", "🍣", "🍧", "🍭", "🌰", "🥗"],
+        ["Ặ", "Ƈ", "Ƌ", "ḗ", "ƕ", "ƈ", "ɇ", "µ", "£", "ø", "ḯ", "ⱳ"],
+        ["🥹", "😎", "🤪", "☺️", "🥳", "🤬", "🥶", "🫥", "💩", "🤯", "😳", "🤢"],
+    ]
+    
+    private var _currentThemeIndex = 0
+    
+    private lazy var _iconList: [String] = _themes[0] // only for debug, default is the first theme in themes.
     
     private lazy final var game: MatchingGame = MatchingGameImpl(cardPairCounts: _cardButtons.count, openColor: #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1), closeColor: #colorLiteral(red: 0.2066814005, green: 0.7795597911, blue: 0.349144876, alpha: 1), matchedColor: #colorLiteral(red: 0.2605186105, green: 0.2605186105, blue: 0.2605186105, alpha: 1), iconSymbols: _iconList, cardClickedPostWork: _updateCardUIs)
     
@@ -29,8 +39,18 @@ class ViewController: UIViewController {
         }
     }
     
+    private var _themeName: String! {
+        didSet {
+            themeNameLabel.text = _themeName
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Debug
+        _themeName = "Theme 1"
+        
         _updateCardUIs()
     }
     
@@ -51,9 +71,20 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
+    private func _nextTheme() {
+        // Debug
+        _currentThemeIndex += 1
+        let themeIndex = _currentThemeIndex % _themes.count
+        _iconList = _themes[themeIndex]
+        game.resetTheme(iconSymbols: _iconList)
+        _themeName = "Theme \(themeIndex + 1)"
+    }
+    
     private func _reset() {
+        _nextTheme()
         game.reset()
         debugModeSwitch.isOn = false
+        
         _updateCardUIs()
     }
     

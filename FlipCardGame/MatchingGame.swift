@@ -12,6 +12,7 @@ protocol MatchingGame {
     func handleClicked(from clickedCard: Card)
     func setDebugMode(mode: Bool)
     func reset()
+    func resetTheme(iconSymbols: Array<String>)
     var cards: Array<Card> { get }
     var flipCounts: Int { get }
     var score: Int { get }
@@ -36,7 +37,7 @@ class MatchingGameImpl {
     private final let _closeColor: UIColor!
     private final let _matchedColor: UIColor!
     private final let _cardPairCounts: Int
-    private final let _iconSymbols: Array<String>
+    private final var _iconSymbols: Array<String>
     private final var _flipingCard: Card!
     private final var _isFlipingLocked = false
     private final let _cardClickedPostWork: () -> Void
@@ -47,6 +48,10 @@ class MatchingGameImpl {
 }
 
 extension MatchingGameImpl: MatchingGame {
+    public func resetTheme(iconSymbols: Array<String>) {
+        _iconSymbols = iconSymbols
+    }
+    
     public func reset() {
         cards.removeAll(keepingCapacity: true)
         flipCounts = 0
