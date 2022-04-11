@@ -13,7 +13,8 @@ protocol MatchingGame {
     func setDebugMode(mode: Bool)
     func reset()
     var cards: Array<Card> { get }
-    var flipCounts: Int { get set }
+    var flipCounts: Int { get }
+    var score: Int { get }
 }
 
 class MatchingGameImpl {
@@ -42,12 +43,14 @@ class MatchingGameImpl {
     
     public final var cards: Array<Card>
     public final var flipCounts = 0
+    public final var score: Int = 0;
 }
 
 extension MatchingGameImpl: MatchingGame {
     public func reset() {
         cards.removeAll(keepingCapacity: true)
         flipCounts = 0
+        score = 0
         _initCardStates()
     }
     
@@ -67,6 +70,7 @@ extension MatchingGameImpl: MatchingGame {
         if _flipingCard.matchId == clickedCard.matchId && clickedCard.id != _flipingCard.id{
             clickedCard.markAsMatched()
             _flipingCard.markAsMatched()
+            score += 30
             _flipingCard = nil
         } else {
             _isFlipingLocked = true
@@ -74,6 +78,7 @@ extension MatchingGameImpl: MatchingGame {
                 clickedCard.flip()
                 self._flipingCard.flip()
                 self._flipingCard = nil
+                self.score -= 10
                 self._cardClickedPostWork()
                 self._isFlipingLocked = false
             }
@@ -98,9 +103,13 @@ extension MatchingGameImpl: MatchingGame {
         cards.shuffle()
     }
     
-    public func setDebugMode(mode: Bool) {
+    public func setDebugMode(mode isDebugEnabled: Bool) {
         cards.forEach { card in
-            card.setDebugMode(mode: mode)
+            card.setDebugMode(mode: isDebugEnabled)
+        }
+        
+        if (isDebugEnabled) {
+            score -= 1000
         }
     }
 }

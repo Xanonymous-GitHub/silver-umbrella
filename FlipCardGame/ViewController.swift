@@ -11,15 +11,21 @@ class ViewController: UIViewController {
     @IBOutlet var _cardButtons: [UIButton]!
     @IBOutlet var flipCountLabel: UILabel!
     @IBOutlet var debugModeSwitch: UISwitch!
+    @IBOutlet var scoreLabel: UILabel!
     
     private var _iconList: [String] = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐥", "🐝", "🐓", "🐲", "🍄", "⛄️"]
     
     private lazy final var game: MatchingGame = MatchingGameImpl(cardPairCounts: _cardButtons.count, openColor: #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1), closeColor: #colorLiteral(red: 0.2066814005, green: 0.7795597911, blue: 0.349144876, alpha: 1), matchedColor: #colorLiteral(red: 0.2605186105, green: 0.2605186105, blue: 0.2605186105, alpha: 1), iconSymbols: _iconList, cardClickedPostWork: _updateCardUIs)
     
-    private var _fCount:Int! = 0
-    {
+    private var _fCount: Int! = 0 {
         didSet {
             flipCountLabel.text = "Flip Count: \(String(describing: _fCount!))"
+        }
+    }
+    
+    private var _score: Int! {
+        didSet {
+            scoreLabel.text = "Score: \(String(describing: _score!))"
         }
     }
     
@@ -60,6 +66,10 @@ extension ViewController {
         _fCount = game.flipCounts
     }
     
+    private func _updateScore() {
+        _score = game.score
+    }
+    
     private func _performCardClicked(targetCardIndex: Int) {
         game.handleClicked(from: game.cards[targetCardIndex])
         _updateCardUIs()
@@ -78,6 +88,8 @@ extension ViewController {
             
             targetCardButton.backgroundColor = targetCard.color
         }
+        
         _updateFCount()
+        _updateScore()
     }
 }
